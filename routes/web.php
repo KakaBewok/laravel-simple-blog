@@ -3,6 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Arr;
 
+
+
+class Post {
+    public static function all(){
+        
+    }
+}
+
 Route::get('/', function () {
     return view('home', ['title' => 'Home Page']);
 });

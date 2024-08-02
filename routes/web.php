@@ -15,6 +15,7 @@ Route::get('/post', function () {
     return view('posts', ['title' => 'Blog Page', 'posts' => [
         [
             'id' => 1,
+            'slug' => 'judul-artikel-1',
             'title' => 'Judul Artikel 1',
             'author' => 'Noprizal',
             'body' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia consequatur, dolorum
@@ -26,6 +27,7 @@ Route::get('/post', function () {
         ],
         [
             'id' => 2,
+            'slug' => 'judul-artikel-2',
             'title' => 'Judul Artikel 2',
             'author' => 'Noprizal Malik',
             'body' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia consequatur, dolorum
@@ -45,10 +47,11 @@ Route::get('/contact', function () {
     return view('contact', ['title' => 'Contact Page']);
 });
 
-Route::get('/post/{id}', function ($id) {
+Route::get('/post/{slug}', function ($slug) {
     $posts = [
         [
             'id' => 1,
+            'slug' => 'judul-artikel-1',
             'title' => 'Judul Artikel 1',
             'author' => 'Noprizal',
             'body' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia consequatur, dolorum
@@ -60,6 +63,7 @@ Route::get('/post/{id}', function ($id) {
         ],
         [
             'id' => 2,
+            'slug' => 'judul-artikel-2',
             'title' => 'Judul Artikel 2',
             'author' => 'Noprizal Malik',
             'body' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia consequatur, dolorum
@@ -74,9 +78,12 @@ Route::get('/post/{id}', function ($id) {
         ]
     ];
 
-    $post = Arr::first($posts, function ($post) use ($id) {
-        return $post['id'] == $id;
+    $post = Arr::first($posts, function ($post) use ($slug) {
+        return $post['slug'] == $slug;
     });
 
-    return view('about', ['title' => 'About Page']);
+    return view('post', [
+        'title' => 'Single Post',
+        'post' => $post
+    ]);
 });

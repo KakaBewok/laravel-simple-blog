@@ -2,14 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Arr;
-
-
-
-class Post {
-    public static function all(){
-        
-    }
-}
+use App\Models\Post;
 
 Route::get('/', function () {
     return view('home', ['title' => 'Home Page']);
@@ -20,35 +13,7 @@ Route::get('/about', function () {
 });
 
 Route::get('/post', function () {
-    return view('posts', ['title' => 'Blog Page', 'posts' => [
-        [
-            'id' => 1,
-            'slug' => 'judul-artikel-1',
-            'title' => 'Judul Artikel 1',
-            'author' => 'Noprizal',
-            'body' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia consequatur, dolorum
-            nihil eligendi
-            voluptatibus, quas molestias veritatis, laudantium error cumque at cum hic. Qui, ea!
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia consequatur, dolorum
-            nihil eligendi
-            voluptatibus, quas molestias veritatis, laudantium error cumque at cum hic. Qui, ea!'
-        ],
-        [
-            'id' => 2,
-            'slug' => 'judul-artikel-2',
-            'title' => 'Judul Artikel 2',
-            'author' => 'Noprizal Malik',
-            'body' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia consequatur, dolorum
-            nihil eligendi
-            voluptatibus, quas molestias veritatis, laudantium error cumque at cum hic. Qui, ea!
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia consequatur, dolorum
-            nihil eligendi
-            voluptatibus, quas molestias veritatis, laudantium error cumque at cum hic. Qui, ea!
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia consequatur, dolorum
-            nihil eligendi
-            voluptatibus, quas molestias veritatis, laudantium error cumque at cum hic. Qui, ea!'
-        ]
-    ]]);
+    return view('posts', ['title' => 'Blog Page', 'posts' => Post::all()]);
 });
 
 Route::get('/contact', function () {
@@ -56,39 +21,9 @@ Route::get('/contact', function () {
 });
 
 Route::get('/post/{slug}', function ($slug) {
-    $posts = [
-        [
-            'id' => 1,
-            'slug' => 'judul-artikel-1',
-            'title' => 'Judul Artikel 1',
-            'author' => 'Noprizal',
-            'body' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia consequatur, dolorum
-            nihil eligendi
-            voluptatibus, quas molestias veritatis, laudantium error cumque at cum hic. Qui, ea!
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia consequatur, dolorum
-            nihil eligendi
-            voluptatibus, quas molestias veritatis, laudantium error cumque at cum hic. Qui, ea!'
-        ],
-        [
-            'id' => 2,
-            'slug' => 'judul-artikel-2',
-            'title' => 'Judul Artikel 2',
-            'author' => 'Noprizal Malik',
-            'body' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia consequatur, dolorum
-            nihil eligendi
-            voluptatibus, quas molestias veritatis, laudantium error cumque at cum hic. Qui, ea!
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia consequatur, dolorum
-            nihil eligendi
-            voluptatibus, quas molestias veritatis, laudantium error cumque at cum hic. Qui, ea!
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia consequatur, dolorum
-            nihil eligendi
-            voluptatibus, quas molestias veritatis, laudantium error cumque at cum hic. Qui, ea!'
-        ]
-    ];
 
-    $post = Arr::first($posts, function ($post) use ($slug) {
-        return $post['slug'] == $slug;
-    });
+
+    $post = Post::find($slug);
 
     return view('post', [
         'title' => 'Single Post',

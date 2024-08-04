@@ -19,10 +19,8 @@ Route::get('/contact', function () {
     return view('contact', ['title' => 'Contact Page']);
 });
 
-Route::get('/post/{slug}', function ($slug) {
-
-
-    $post = Post::find($slug);
+//route model binding, search by instance object
+Route::get('/post/{post:slug}', function (Post $post) {
 
     return view('post', [
         'title' => 'Single Post',

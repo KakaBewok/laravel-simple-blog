@@ -27,24 +27,30 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         //manual
-        User::create([
-            'name' => "Noprizal",
-            'username' => "noprizal",
-            'email' => "noprizal@gmail.com",
-            'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
-        ]);
-        PostCategory::create([
-            'name' => 'Technology',
-            'slug' => 'tech',
-        ]);
-        Post::create([
-            'title' => "Laravel 11",
-            'author_id' => 1, 
-            'post_category_id' => 1,
-            'slug' => "laravel-11",
-            'body' => 'hdjshd asdhasdahd jsdhsajdh sjdhasjdas jsdhasjd jsadhsad ajsdhsajd jashdsjad asjdsdasd asdasda dasdsdshc sdsh sd sdsdsd sdhsds dsdhsdsds shdsds sdhsdsds sdhsdsdsd shdsd '
-        ]);
+        // User::create([
+        //     'name' => "Noprizal",
+        //     'username' => "noprizal",
+        //     'email' => "noprizal@gmail.com",
+        //     'email_verified_at' => now(),
+        //     'password' => Hash::make('password'),
+        //     'remember_token' => Str::random(10),
+        // ]);
+        // PostCategory::create([
+        //     'name' => 'Technology',
+        //     'slug' => 'tech',
+        // ]);
+        // Post::create([
+        //     'title' => "Laravel 11",
+        //     'author_id' => 1, 
+        //     'post_category_id' => 1,
+        //     'slug' => "laravel-11",
+        //     'body' => 'hdjshd asdhasdahd jsdhsajdh sjdhasjdas jsdhasjd jsadhsad ajsdhsajd jashdsjad asjdsdasd asdasda dasdsdshc sdsh sd sdsdsd sdhsds dsdhsdsds shdsds sdhsdsds sdhsdsdsd shdsd '
+        // ]);
+
+        //advance by factory
+        Post::factory(10)->recycle([
+            User::factory(2)->create(),
+            PostCategory::factory(5)->create()
+        ])->create();
     }
 }

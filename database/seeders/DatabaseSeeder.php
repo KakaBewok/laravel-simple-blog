@@ -2,9 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Post;
+use App\Models\PostCategory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +17,34 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        //create by factory
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // replace the field 'name' and 'email' at factories
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
+
+        //manual
+        User::create([
+            'name' => "Noprizal",
+            'username' => "noprizal",
+            'email' => "noprizal@gmail.com",
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ]);
+        PostCategory::create([
+            'name' => 'Technology',
+            'slug' => 'tech',
+        ]);
+        Post::create([
+            'title' => "Laravel 11",
+            'author_id' => 1, 
+            'post_category_id' => 1,
+            'slug' => "laravel-11",
+            'body' => 'hdjshd asdhasdahd jsdhsajdh sjdhasjdas jsdhasjd jsadhsad ajsdhsajd jashdsjad asjdsdasd asdasda dasdsdshc sdsh sd sdsdsd sdhsds dsdhsdsds shdsds sdhsdsds sdhsdsdsd shdsd '
         ]);
     }
 }

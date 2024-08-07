@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\Post;
+use App\Models\PostCategory;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+
 
 
 Route::get('/', function () {
@@ -30,10 +32,18 @@ Route::get('/post/{post:slug}', function (Post $post) {
     ]);
 });
 
-Route::get('/author/{user}', function (User $user) {
+Route::get('/author/{user:username}', function (User $user) {
 
     return view('posts', [
-        'title' => 'Articles by ' . $user->name,
+        'title' => count($user->posts) . ' Articles by ' . $user->name,
         'posts' => $user->posts
+    ]);
+});
+
+Route::get('/category/{postCategory:slug}', function (PostCategory $postCategory) {
+
+    return view('posts', [
+        'title' => count($postCategory->posts) . ' Articles categories by ' . $postCategory->name,
+        'posts' => $postCategory->posts
     ]);
 });

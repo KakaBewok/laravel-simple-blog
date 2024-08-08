@@ -5,8 +5,6 @@ use App\Models\PostCategory;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
-
-
 Route::get('/', function () {
     return view('home', ['title' => 'Home Page']);
 });
@@ -16,8 +14,10 @@ Route::get('/about', function () {
 });
 
 Route::get('/post', function () {
-    $posts = Post::with(['author', 'category'])->latest()->get();
-    return view('posts', ['title' => 'Blog Page', 'posts' => $posts]);
+    //eager loading manual
+    // $posts = Post::with(['author', 'category'])->latest()->get();
+
+    return view('posts', ['title' => 'Blog Page', 'posts' => Post::latest()->get()]);
 });
 
 Route::get('/contact', function () {
@@ -34,6 +34,8 @@ Route::get('/post/{post:slug}', function (Post $post) {
 });
 
 Route::get('/author/{user:username}', function (User $user) {
+    //eager loading manual
+    // $posts = $user->posts->load('category', 'author');
 
     return view('posts', [
         'title' => count($user->posts) . ' Articles by ' . $user->name,
@@ -42,6 +44,8 @@ Route::get('/author/{user:username}', function (User $user) {
 });
 
 Route::get('/category/{postCategory:slug}', function (PostCategory $postCategory) {
+    //eager loading manual
+    // $posts = $postCategory->posts->load('category', 'author');
 
     return view('posts', [
         'title' => count($postCategory->posts) . ' Articles ' . $postCategory->name,

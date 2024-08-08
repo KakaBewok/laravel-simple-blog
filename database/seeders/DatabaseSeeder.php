@@ -48,9 +48,35 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         //advance by factory
+        // Post::factory(10)->recycle([
+        //     User::factory(2)->create(),
+        //     PostCategory::factory(5)->create()
+        // ])->create();
+
+        //advance by factory and mix 1 user 
+        // $noprizal = User::create([
+        //     'name' => "Noprizal",
+        //     'username' => "noprizal",
+        //     'email' => "noprizal@gmail.com",
+        //     'email_verified_at' => now(),
+        //     'password' => Hash::make('password'),
+        //     'remember_token' => Str::random(10),
+        // ]);
+        // Post::factory(10)->recycle([
+        //     User::factory(2)->create(),
+        //     $noprizal,
+        //     PostCategory::factory(5)->create()
+        // ])->create();
+
+
+        //calling others Seeder Object
+        $this->call([
+            UserSeeder::class,
+            PostCategorySeeder::class,
+        ]);
         Post::factory(10)->recycle([
-            User::factory(2)->create(),
-            PostCategory::factory(5)->create()
+            User::all(),
+            PostCategory::all()
         ])->create();
     }
 }

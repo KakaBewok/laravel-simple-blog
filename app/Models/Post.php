@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Builder;
 
 class Post extends Model
 {
@@ -33,5 +34,11 @@ class Post extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(PostCategory::class, 'post_category_id');
+    }
+
+    //kata scope diawal method wajib untuk membuat scope query metho
+    public function scopeFilter(Builder $query): void
+    {
+        $query->where('title', 'like', '%' . request('search') . '%');
     }
 }

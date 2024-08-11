@@ -20,14 +20,17 @@ class PostCategorySeeder extends Seeder
         PostCategory::create([
             'name' => 'Technology',
             'slug' => 'technology',
+            'color' => 'green',
         ]);
         PostCategory::create([
             'name' => 'UI & UX',
             'slug' => 'ui-ux',
+            'color' => 'blue',
         ]);
         PostCategory::create([
             'name' => 'Machine Learning',
             'slug' => 'machine-learning',
+            'color' => 'yellow',
         ]);
     }
 }

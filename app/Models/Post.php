@@ -36,9 +36,11 @@ class Post extends Model
         return $this->belongsTo(PostCategory::class, 'post_category_id');
     }
 
-    //kata scope diawal method wajib untuk membuat scope query metho
-    public function scopeFilter(Builder $query): void
+    //kata scope diawal method wajib untuk membuat scope query method
+    public function scopeFilter(Builder $query, array $filters): void
     {
-        $query->where('title', 'like', '%' . request('search') . '%');
+        if ($filters['search'] ?? false) {
+            $query->where('title', 'like', '%' . request('search') . '%');
+        }
     }
 }

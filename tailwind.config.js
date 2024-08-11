@@ -9,7 +9,6 @@ export default {
         "./resources/**/*.vue",
         "./node_modules/flowbite/**/*.js",
     ],
-    //for dynamic classes
     safeList: ["bg-green-100", "bg-blue-100", "bg-yellow-100"],
     theme: {
         extend: {
@@ -41,7 +40,7 @@ export default {
                     300: "#93c5fd",
                     400: "#60a5fa",
                     500: "#3b82f6",
-                    600: "#2563eb",
+
                     700: "#1d4ed8",
                     800: "#1e40af",
                     900: "#1e3a8a",
@@ -52,3 +51,4 @@ export default {
     },
     plugins: [require("flowbite/plugin"), require("flowbite-typography")],
 };
+// 600: "#2563eb",

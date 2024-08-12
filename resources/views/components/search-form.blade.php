@@ -1,6 +1,12 @@
 <div class="max-w-screen-xl px-4 py-4 mx-auto lg:px-6">
     <div class="max-w-screen-md mx-auto sm:text-center">
         <form>
+            @if (request('category'))
+            <input type="hidden" name="category" value="{{ request('category'); }}">
+            @endif
+            @if (request('author'))
+            <input type="hidden" name="author" value="{{ request('author'); }}">
+            @endif
             <div class="items-center max-w-screen-sm mx-auto mb-3 space-y-4 sm:flex sm:space-y-0">
                 <div class="relative w-full">
                     <label for="search"

@@ -9,7 +9,14 @@ export default {
         "./resources/**/*.vue",
         "./node_modules/flowbite/**/*.js",
     ],
-    safeList: ["bg-green-100", "bg-blue-100", "bg-yellow-100"],
+    safelist: [
+        "bg-green-100", 
+        "bg-blue-100", 
+        "bg-yellow-100",
+        {
+            pattern: /bg-(yellow|green|blue)-100/,
+        },
+    ],
     theme: {
         extend: {
             fontFamily: {

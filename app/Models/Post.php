@@ -37,10 +37,32 @@ class Post extends Model
     }
 
     //kata scope diawal method wajib untuk membuat scope query method
+    //param default: Builder $query
     public function scopeFilter(Builder $query, array $filters): void
     {
-        if ($filters['search'] ?? false) {
-            $query->where('title', 'like', '%' . request('search') . '%');
-        }
+        //search all blogs
+        $query->when($filters['search'] ?? false, fn (Builder $query, $search) =>
+            $query->where('title', 'like', '%' . $search . '%')
+        );
+
+        //search posts and categories
+        $query->when(
+            $filters['category'] ?? false,
+            fn(Builder $query, $category) =>
+            $query->whereHas('category', fn(Builder $query) => 
+                $query->where('slug', $category)
+            )
+        );
+
+        //search posts and authors
+        $query->when(
+            $filters['author'] ?? false,
+            fn(Builder $query, $author) =>
+            $query->whereHas(
+                'author',
+                fn(Builder $query) =>
+                $query->where('username', $author)
+            )
+        );
     }
 }

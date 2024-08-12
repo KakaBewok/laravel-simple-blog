@@ -17,7 +17,7 @@ Route::get('/post', function () {
     //eager loading manual
     // $posts = Post::with(['author', 'category'])->latest()->get();
 
-    return view('posts', ['title' => 'Blog Page', 'posts' => Post::filter(request(['search', 'category', 'author']))->latest()->get()]);
+    return view('posts', ['title' => 'Blog Page', 'posts' => Post::filter(request(['search', 'category', 'author']))->latest()->paginate(5)->withQueryString()]);
 });
 
 Route::get('/contact', function () {
